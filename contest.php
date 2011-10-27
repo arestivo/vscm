@@ -35,7 +35,7 @@
 	$users = user_getInContest($_GET['cid']);
 	$problems = problem_getInContest($_GET['cid']);
 
-//	if ($contest['start'] > time()) die('Not started');
+	if ($contest['start'] > time()) die('Not started');
 
 	foreach ($users as $uid => $user) {
 		$solved = 0; $total = 0;
