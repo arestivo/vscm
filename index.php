@@ -8,9 +8,9 @@
 	$db = new PDO('sqlite:database/vscm.db');
 
 	$stats = user_getStats();
-	$problem = problem_stats();
+	$problems = problem_stats();
 	$smarty->assign('stats', $stats);
-	$smarty->assign('problem', $problem);
+	$smarty->assign('problems', $problems);
 	$smarty->display('index.tpl');
 
 ?>
