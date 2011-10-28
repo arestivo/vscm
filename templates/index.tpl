@@ -18,4 +18,11 @@
 {/foreach}
 </table>
 
+<h2>Problem Statistics</h2>
+<table>
+{foreach from=$problems item=problem}
+<tr>{$problem.code}</tr>
+{/foreach}
+</table>
+
 {include file="footer.tpl"}
