@@ -45,7 +45,7 @@
 				$contest['start'], 
 				$contest['stop']
 			);
-			$state = 'NS'; $fails = 0; $time = 0;
+			$state = 'NS'; $fails = 0; $time = 0; $dtime = "0:00:00";
 			foreach ($submissions as $submission) {
 				$state = $submission['result'];
 				if ($submission['result'] == 'AC') {
