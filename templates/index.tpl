@@ -20,9 +20,15 @@
 
 <h2>Problem Statistics</h2>
 <table>
-{foreach from=$problems item=problem}
-<tr>{$problem.code}</tr>
+<tr>
+{foreach from=$problems item=problem name=problems}
+<td>{$problem.code}</td>
+{if $smarty.foreach.problems.index % 5 == 0}
+</tr>
+<tr>
+{/if}
 {/foreach}
+</tr>
 </table>
 
 {include file="footer.tpl"}
