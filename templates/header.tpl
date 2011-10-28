@@ -19,9 +19,6 @@
             <li><a href="index.php">Stats</a></li>
             <li><a href="contests.php">Contests</a></li>
           </ul>
-          <form class="pull-left" action="">
-            <input placeholder="Search" type="text">
-          </form>
         </div>
       </div><!-- /topbar-inner -->
     </div><!-- /topbar -->
