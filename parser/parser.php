@@ -33,7 +33,7 @@
 
 			if ($lastid != null && (int)$fields[1] <= (int)$lastid) break;
 			if ($fields[4] == '??') break;
-			if (is_numeric($fields[4])) $fields[4] = 'AC';
+			if (is_numeric(trim($fields[4]))) $fields[4] = 'AC';
 			echo $fields[4] . " - " . is_numeric($fields[4]) . "<br/>";
 			$prows[] = array(
 				'sid' => trim($fields[1]),
