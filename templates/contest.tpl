@@ -22,7 +22,7 @@
 		{if $problem.fails == 0}
 		<td class="notdone">-</td>
 		{else}
-		<td class="failed">{$problem.fails})</td>
+		<td class="failed">({$problem.fails})</td>
 		{/if}
 	{/if}
 {/foreach}

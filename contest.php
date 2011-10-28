@@ -6,9 +6,11 @@
 	require_once ('database/refresh.php');
 	date_default_timezone_set('Europe/Lisbon');
 
+	$smarty = new Smarty;
 	$db = new PDO('sqlite:database/vscm.db');
 
-	if ($contest['start'] < time() && $contest['end'] > time()) {
+	$contest = contest_get($_GET['cid']);
+	if ((int)$contest['start'] < time() && (int)$contest['stop'] > time()) {
 		$lastrefresh = file_get_contents('last_refresh');
 		if ($lastrefresh == '' || $lastrefresh + 180 < time()) {
 			$db->beginTransaction();
@@ -28,10 +30,7 @@
 		return $hours . ':' . $minutes . ':' . $seconds;
 	}
 
-	$smarty = new Smarty;
-	$db = new PDO('sqlite:database/vscm.db');
 
-	$contest = contest_get($_GET['cid']);
 	$users = user_getInContest($_GET['cid']);
 	$problems = problem_getInContest($_GET['cid']);
 
@@ -50,12 +49,11 @@
 			foreach ($submissions as $submission) {
 				$state = $submission['result'];
 				if ($submission['result'] == 'AC') {
-					$time = $submission['stamp'] - $contest['start'];
+					$time = $submission['stamp'] - $contest['start'] + $fails * 20 * 60;
 					$dtime = getTime($submission['stamp'] - $contest['start']);
 					$solved++; $total += $time;
 					break;
 				}
-				$time += 20;
 				$fails++; 
 			}
 			$users[$uid]['problems'][] = array('state' => $state, 'fails' => $fails, 'time' => $dtime);
@@ -63,6 +61,12 @@
 		$users[$uid]['solved'] = $solved;
 		$users[$uid]['total'] = getTime($total);
 	}
+
+	function cmp($a, $b) {
+		return ($a['solved'] < $b['solved']);
+	}
+	
+	usort($users, "cmp");
 
 	$smarty->assign('contest', $contest);
 	$smarty->assign('users', $users);

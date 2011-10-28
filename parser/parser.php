@@ -2,7 +2,8 @@
 
 
 	function parser_get_html($user) {
-		return file_get_contents('http://www.spoj.pl/status/'.$user.'/signedlist/');
+		$html = file_get_contents('http://www.spoj.pl/status/'.$user.'/signedlist/');
+		return $html;
 	}
 
 	function parser_get_table($html) {
@@ -26,12 +27,12 @@
 		$html =	parser_get_html($username);
 		$table = parser_get_table($html);
 		$rows = parser_get_rows($table);
-
 		foreach ($rows as $row) {
 			if (trim($row)=='') continue;
 			$fields = explode('|', $row);
 
-			if ($lastid != null && $fields[1] <= $lastid) break;
+			if ($lastid != null && (int)$fields[1] <= (int)$lastid) break;
+			if ($fields[4] == '??') break;
 			$prows[] = array(
 				'sid' => trim($fields[1]),
 				'code' => trim($fields[3]),
