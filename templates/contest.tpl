@@ -9,7 +9,7 @@
 <td><a href="http://www.spoj.pl/problems/{$problem.code}/">{$problem.code}</a></td>
 {/foreach}
 <td>Solved</td>
-<td>Total Time</td>
+<td>Time</td>
 </tr>
 
 {foreach from=$users key=uid item=user}
