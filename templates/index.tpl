@@ -8,7 +8,12 @@
 	<td>{$stat.realname}</td>
 	<td>{$stat.submissions}</td>
 	<td>{$stat.accepted}</td>
-	<td>{if $stat.submissions != 0}{($stat.accepted / $stat.submissions * 100)|string_format:"%.0f"}%{/else}-{/if}</td>
+	<td>
+		{if $stat.submissions != 0}
+			{($stat.accepted / $stat.submissions * 100)|string_format:"%.0f"}%
+		{else}-
+		{/if}
+	</td>
 </tr>
 {/foreach}
 </table>
