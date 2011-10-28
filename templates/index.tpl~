@@ -4,7 +4,12 @@
 <table>
 <tr><th>Username</th><th>Submissions</th><th>Accepted</th></tr>
 {foreach from=$stats item=stat}
-<tr><td>{$stat.realname}</td><td>{$stat.submissions}</td><td>{$stat.accepted}</td></tr>
+<tr>
+	<td>{$stat.realname}</td>
+	<td>{$stat.submissions}</td>
+	<td>{$stat.accepted}</td>
+	<td>{($stat.accepted / $stat.submissions * 100)|string_format:"%.0f"}%</td>
+</tr>
 {/foreach}
 </table>
 
