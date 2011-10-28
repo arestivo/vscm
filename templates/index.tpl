@@ -23,7 +23,7 @@
 <tr>
 {foreach from=$problems item=problem name=problems}
 <td>{$problem.code}</td>
-{if $smarty.foreach.problems.index % 5 == 0}
+{if $smarty.foreach.problems.index % 5 == 4}
 </tr>
 <tr>
 {/if}
