@@ -4,7 +4,10 @@
 	require_once('database/problem.php');
 	date_default_timezone_set('Europe/Lisbon');
 
-        $lastrefresh = file_get_contents('last_refresh');
+	$smarty = new Smarty;
+	$db = new PDO('sqlite:database/vscm.db');
+        
+	$lastrefresh = file_get_contents('last_refresh');
         if ($lastrefresh == '' || $lastrefresh + 600 < time()) {
            $db->beginTransaction();
            refresh_all();
@@ -13,8 +16,6 @@
 	}
 
 
-	$smarty = new Smarty;
-	$db = new PDO('sqlite:database/vscm.db');
 
 	$stats = user_getStats();
 	$problems = problem_stats();
