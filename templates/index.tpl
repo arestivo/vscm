@@ -22,7 +22,7 @@
 <table>
 <tr>
 {foreach from=$problems item=problem name=problems}
-<td>{$problem.code}</td>
+<td class="{if $problem.accepted > 0}accepted{else}failed{/if}">{$problem.code}</td>
 {if $smarty.foreach.problems.index % 5 == 4}
 </tr>
 <tr>
