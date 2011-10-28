@@ -2,6 +2,7 @@
 	require_once('smarty/Smarty.class.php');
 	require_once('database/user.php');
 	require_once('database/problem.php');
+	require_once('refresh/refresh.php');
 	date_default_timezone_set('Europe/Lisbon');
 
 	$smarty = new Smarty;
@@ -14,8 +15,6 @@
            $db->commit();
            file_put_contents('last_refresh', time());
 	}
-
-
 
 	$stats = user_getStats();
 	$problems = problem_stats();
