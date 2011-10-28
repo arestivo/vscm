@@ -7,8 +7,7 @@ DROP TABLE user;
 
 CREATE TABLE user (
 	username VARCHAR PRIMARY KEY,
-	realname VARCHAR,
-	latstid INTEGER
+	realname VARCHAR
 );
 
 CREATE TABLE problem (
@@ -43,15 +42,15 @@ CREATE TABLE partof (
 	PRIMARY KEY (cid, code)
 );
 
-INSERT INTO user VALUES('mogers', 'Miguel Oliveira', NULL);
-INSERT INTO user VALUES('arestivo', 'André Restivo', NULL);
-INSERT INTO user VALUES('miguelaraujo', 'Miguel Araújo', NULL);
-INSERT INTO user VALUES('ivotimoteo', 'Ivo Timóteo', NULL);
-INSERT INTO user VALUES('cristo', 'João Xavier', NULL);
-INSERT INTO user VALUES('andresp', 'André Susano Pinto', NULL);
-INSERT INTO user VALUES('andre_santos', 'André Santos', NULL);
-INSERT INTO user VALUES('jcazevedo', 'João Azevedo', NULL);
-INSERT INTO user VALUES('hugopeixoto', 'Hugo Peixoto', NULL);
+INSERT INTO user VALUES('mogers', 'Miguel Oliveira');
+INSERT INTO user VALUES('arestivo', 'André Restivo');
+INSERT INTO user VALUES('miguelaraujo', 'Miguel Araújo');
+INSERT INTO user VALUES('ivotimoteo', 'Ivo Timóteo');
+INSERT INTO user VALUES('cristo', 'João Xavier');
+INSERT INTO user VALUES('andresp', 'André Susano Pinto');
+INSERT INTO user VALUES('andre_santos', 'André Santos');
+INSERT INTO user VALUES('jcazevedo', 'João Azevedo');
+INSERT INTO user VALUES('hugopeixoto', 'Hugo Peixoto');
 
 INSERT INTO contest VALUES(NULL, 'Qualificação SWERC 2011', 1319803200, 1319817600);
 
