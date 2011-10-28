@@ -9,4 +9,6 @@
 	$stats = user_getStats();
 	$smarty->assign('stats', $stats);
 	$smarty->display('index.tpl');
+
+	print_r(problem_stats());
 ?>

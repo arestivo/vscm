@@ -30,4 +30,13 @@
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);	
 	}
 
+	function problem_stats() {
+		global $db;
+		$stmt = $db->prepare('SELECT code,
+			COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
+			COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed 
+			FROM submission GROUP BY code');
+		$stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
 ?>
