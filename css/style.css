@@ -56,6 +56,6 @@
 		background-color: #F99;
       }
 
-	  .accepted, .notdone, .failed {
+	  .accepted, .notdone, .failed, .solved, .total {
 		text-align: center;
 	  }

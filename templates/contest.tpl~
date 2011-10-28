@@ -9,7 +9,7 @@
 <td><a href="http://www.spoj.pl/problems/{$problem.code}/">{$problem.code}</a></td>
 {/foreach}
 <td>Solved</td>
-<td>Total Time</td>
+<td>Time</td>
 </tr>
 
 {foreach from=$users key=uid item=user}
@@ -22,7 +22,7 @@
 		{if $problem.fails == 0}
 		<td class="notdone">-</td>
 		{else}
-		<td class="failed">{problem.fails})</td>
+		<td class="failed">{$problem.fails})</td>
 		{/if}
 	{/if}
 {/foreach}
