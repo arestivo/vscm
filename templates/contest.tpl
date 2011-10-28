@@ -13,7 +13,7 @@
 </tr>
 
 {foreach from=$users key=uid item=user}
-<tr><td>{$user.realname}</td>
+<tr><td class="name">{$user.realname}</td>
 
 {foreach from=$users[$uid]['problems'] item=problem} 
 	{if $problem.state == 'AC'}

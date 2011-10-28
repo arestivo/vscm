@@ -26,7 +26,7 @@
 		{/if}
 	{/if}
 {/foreach}
-<td>{$user.solved}</td><td>{$user.total}</td>
+<td class="solved">{$user.solved}</td><td class="total">{$user.total}</td>
 </tr>
 {/foreach}
 </table>
