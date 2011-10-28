@@ -3,7 +3,8 @@
 		global $db;
 		$stmt = $db->prepare(
 			'SELECT realname, username, 
-					COUNT(submission.sid) AS submissions 
+					COUNT(submission.sid) AS submissions,
+					COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted
 			 FROM user LEFT JOIN 
 				  submission USING(username) 
 			 GROUP BY username');
