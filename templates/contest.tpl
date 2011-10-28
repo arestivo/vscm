@@ -4,12 +4,12 @@
 <table class="results">
 
 <tr>
-<td>Contestant</td>
+<th>Contestant</th>
 {foreach from=$problems item=problem}
-<td><a href="http://www.spoj.pl/problems/{$problem.code}/">{$problem.code}</a></td>
+<th><a href="http://www.spoj.pl/problems/{$problem.code}/">{$problem.code}</a></th>
 {/foreach}
-<td>Solved</td>
-<td>Time</td>
+<th>Solved</th>
+<th>Time</th>
 </tr>
 
 {foreach from=$users key=uid item=user}
