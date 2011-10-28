@@ -1,7 +1,7 @@
 {include file="header.tpl"}
 <h2>{$contest.name}</h2>
 
-<table>
+<table class="results">
 
 <tr>
 <td>Contestant</td>
