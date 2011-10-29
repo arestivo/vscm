@@ -72,4 +72,4 @@ INSERT INTO partof VALUES(1,'BUGLIFE');
 INSERT INTO partof VALUES(1,'WORDS1');
 INSERT INTO partof VALUES(1,'HERDING');
 
-INSERT INTO participation ('lordogoid', 1);
+INSERT INTO participation VALUES('lordogoid', 1);
