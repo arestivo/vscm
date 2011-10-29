@@ -56,7 +56,7 @@
 				}
 				$fails++; 
 			}
-			$users[$uid]['problems'][] = array('state' => $state, 'fails' => $fails, 'time' => $dtime);
+			$users[$uid]['problems'][] = array('code' => $problem['code'], 'state' => $state, 'fails' => $fails, 'time' => $dtime);
 		}
 		$users[$uid]['solved'] = $solved;
 		$users[$uid]['total'] = getTime($total);

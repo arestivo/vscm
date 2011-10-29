@@ -17,12 +17,12 @@
 
 {foreach from=$users[$uid]['problems'] item=problem} 
 	{if $problem.state == 'AC'}
-	<td class="accepted">{$problem.time} ({$problem.fails})</td>
+	<td class="accepted"><a href="http://www.spoj.pl/status/{$problem.code},{$user.username}/">{$problem.time} ({$problem.fails})</a></td>
 	{else}
 		{if $problem.fails == 0}
 		<td class="notdone">-</td>
 		{else}
-		<td class="failed">({$problem.fails})</td>
+		<td class="failed"><a href="http://www.spoj.pl/status/{$problem.code},{$user.username}/">({$problem.fails})</a></td>
 		{/if}
 	{/if}
 {/foreach}

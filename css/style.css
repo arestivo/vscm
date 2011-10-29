@@ -64,6 +64,10 @@
 	  	font-size: 85%;
   	  }
 
+	  table td a {
+		color: #404040;
+	  }
+
 	  .probok a{ color: green}
 	  .probfail a{ color: red}
 
