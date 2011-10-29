@@ -51,6 +51,7 @@ INSERT INTO user VALUES('andresp', 'André Susano Pinto');
 INSERT INTO user VALUES('andre_santos', 'André Santos');
 INSERT INTO user VALUES('jcazevedo', 'João Azevedo');
 INSERT INTO user VALUES('hugopeixoto', 'Hugo Peixoto');
+INSERT INTO user VALUES('raf', 'Rui Ferreira');
 INSERT INTO user VALUES('lordogoid', 'Diogo Pinela');
 
 INSERT INTO contest VALUES(NULL, 'Qualificação SWERC 2011', 1319803200, 1319817600);
