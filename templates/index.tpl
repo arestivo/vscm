@@ -19,6 +19,9 @@
 </table>
 
 <h2>Problem Statistics</h2>
+
+<div id="problemchart" style="width: 100%; height: 400px"></div>
+
 <table>
 <tr>
 {foreach from=$problems item=problem name=problems}

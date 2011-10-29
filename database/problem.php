@@ -39,4 +39,43 @@
 		$stmt->execute();
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	function problem_datestats() {
+		global $db;
+		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as d, 				COUNT(*) AS submited,
+			COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
+			COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed 
+			FROM submission GROUP BY strftime(\'%Y-%m\', stamp, \'unixepoch\') ORDER BY d');
+		$stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$first = explode('-', $data[0]['d']);
+		foreach ($data as $d) $last = explode('-',$d['d']);
+		$year = $first[0]; $month = $first[1];
+		while ($year < $last[0] || $year == $last[0] && $month <= $last[1]) {
+			if ($month < 10) $month = '0' . $month;
+			$stats["$year-$month"] = array(0,0,0);
+			$month++;
+			if ($month == 13) {$month = 1; $year++;}
+		}
+		foreach ($data as $d) $stats[$d['d']] = array((int)$d['submited'], (int)$d['accepted'], (int)$d['failed']);
+		foreach ($stats as $y => $s) {
+			$return[0][] = $y;
+			$return[1][] = $s[0];
+			$return[2][] = $s[1];
+			$return[3][] = $s[2];
+		}
+		return $return;
+	}
+
+	function problem_catstats() {
+		global $db;
+		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as c FROM submission GROUP BY strftime(\'%Y-%m\', stamp, \'unixepoch\') ORDER BY strftime(\'%Y-%m\', stamp, \'unixepoch\')');
+		$stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		foreach ($data as $d) {
+			$stats[] = $d['c'];
+		}
+		return $stats;
+	}
+
 ?>
