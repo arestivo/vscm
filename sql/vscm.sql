@@ -57,7 +57,7 @@ INSERT INTO user VALUES('tiagobabo', 'Tiago Babo');
 INSERT INTO user VALUES('wbs', 'William Baumgartner');
 
 
-INSERT INTO contest VALUES(NULL, 'Qualificação SWERC 2011', 1319803200, 1319817600);
+INSERT INTO contest VALUES(NULL, 'Qualificação SWERC 2011', 1319806800, 1319821200);
 
 INSERT INTO problem VALUES('CANDY');
 INSERT INTO problem VALUES('AE1B');
