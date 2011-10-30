@@ -48,6 +48,14 @@
         border: 0;
       }
 
+	  table td a {
+		color: #0069D6;
+	  }
+
+	  table td.accepted a, table td.failed a {
+		color: #404040;
+      }
+
 	  .accepted {
 		background-color: #9F9;
       }
@@ -63,10 +71,6 @@
 	  table {
 	  	font-size: 85%;
   	  }
-
-	  table td a {
-		color: #404040;
-	  }
 
 	  .probok a{ color: green}
 	  .probfail a{ color: red}
