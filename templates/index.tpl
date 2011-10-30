@@ -5,7 +5,10 @@
 <tr><th>Username</th><th>Submissions</th><th>Accepted</th><th>Ratio</th></tr>
 {foreach from=$stats item=stat}
 <tr>
-	<td><a href="user.php?username={$stat.username}">{$stat.realname}</a></td>
+	<td>
+		<span class="inlinesparkline">{$stat.accepted},{$stat.failed}</span>
+		<a href="user.php?username={$stat.username}">{$stat.realname}</a>
+	</td>
 	<td>{$stat.submissions}</td>
 	<td>{$stat.accepted}</td>
 	<td>
