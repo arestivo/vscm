@@ -8,6 +8,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
 		<script src="js/highcharts.js" type="text/javascript"></script>
 		<script src="js/jquery.jquery.js" type="text/javascript"></script>
+		<script src="js/jquery.sparkline.min.js" type="text/javascript"></script>
 		<script src="js/vscm.js" type="text/javascript"></script>
 		<meta charset="utf-8">
 	</head>

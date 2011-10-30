@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$('.inlinesparkline').sparkline('html',{type: 'pie', barColor: 'green', sliceColors: ['#393','#933']});
 	$.getJSON('probstats.php', {"username" : $.query.get('username')}, function(points) {
 		new Highcharts.Chart({
 		     chart: {
@@ -31,7 +32,7 @@ $(document).ready(function() {
 		     },{
 		        name: 'Failed',
 		        data: points[3],
-				color: '#936'
+				color: '#933'
 		     }]
 		  });
 	});
