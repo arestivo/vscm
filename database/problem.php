@@ -42,7 +42,8 @@
 
 	function problem_datestats() {
 		global $db;
-		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as d, 				COUNT(*) AS submited,
+		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as d, 
+			COUNT(*) AS submited,
 			COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
 			COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed 
 			FROM submission GROUP BY strftime(\'%Y-%m\', stamp, \'unixepoch\') ORDER BY d');
@@ -65,17 +66,6 @@
 			$return[3][] = $s[2];
 		}
 		return $return;
-	}
-
-	function problem_catstats() {
-		global $db;
-		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as c FROM submission GROUP BY strftime(\'%Y-%m\', stamp, \'unixepoch\') ORDER BY strftime(\'%Y-%m\', stamp, \'unixepoch\')');
-		$stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($data as $d) {
-			$stats[] = $d['c'];
-		}
-		return $stats;
 	}
 
 ?>
