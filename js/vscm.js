@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$.getJSON('probstats.php', function(points) {
+	$.getJSON('probstats.php', {"username" : $.query.get('username')}, function(points) {
 		new Highcharts.Chart({
 		     chart: {
 		        renderTo: 'problemchart',

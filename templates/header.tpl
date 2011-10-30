@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="css/style.css">
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
 		<script src="js/highcharts.js" type="text/javascript"></script>
+		<script src="js/jquery.jquery.js" type="text/javascript"></script>
 		<script src="js/vscm.js" type="text/javascript"></script>
 		<meta charset="utf-8">
 	</head>
@@ -19,7 +20,8 @@
         <div class="container">
           <h3><a href="index.php">Virtual Contest Manager</a></h3>
           <ul class="nav">
-            <li><a href="index.php">Stats</a></li>
+            <li><a href="index.php">Users</a></li>
+            <li><a href="problems.php">Problems</a></li>
             <li><a href="contests.php">Contests</a></li>
           </ul>
         </div>

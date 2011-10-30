@@ -5,7 +5,7 @@
 <tr><th>Username</th><th>Submissions</th><th>Accepted</th><th>Ratio</th></tr>
 {foreach from=$stats item=stat}
 <tr>
-	<td>{$stat.realname}</td>
+	<td><a href="user.php?username={$stat.username}">{$stat.realname}</a></td>
 	<td>{$stat.submissions}</td>
 	<td>{$stat.accepted}</td>
 	<td>
@@ -16,25 +16,6 @@
 	</td>
 </tr>
 {/foreach}
-</table>
-
-<h2>Problem Statistics</h2>
-
-<div id="problemchart" style="width: 100%; height: 400px"></div>
-
-<table>
-<tr>
-{foreach from=$problems item=problem name=problems}
-<td class="{if $problem.accepted > 0}probok{else}probfail{/if}">
-	<a href="http://www.spoj.pl/problems/{$problem.code}/">{$problem.code}</a> 
-	{($problem.accepted / ($problem.accepted + $problem.failed) * 100)|string_format:"%.0f"}%
-</td>
-{if $smarty.foreach.problems.index % 5 == 4}
-</tr>
-<tr>
-{/if}
-{/foreach}
-</tr>
 </table>
 
 {include file="footer.tpl"}
