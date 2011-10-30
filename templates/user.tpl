@@ -13,4 +13,6 @@
 	</li>
 </ul>
 
+<div id="problemchart" style="width: 100%; height: 400px"></div>
+
 {include file="footer.tpl"}
