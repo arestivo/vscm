@@ -64,7 +64,7 @@
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$first = explode('-', $data[0]['d']);
 		foreach ($data as $d) $last = explode('-',$d['d']);
-		$year = $first[0]; $month = $first[1];
+		$year = (int)$first[0]; $month = (int)$first[1];
 		while ($year < $last[0] || $year == $last[0] && $month <= $last[1]) {
 			if ($month < 10) $month = '0' . $month;
 			$stats["$year-$month"] = array(0,0,0);
