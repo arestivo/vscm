@@ -9,6 +9,15 @@
 		return $result[0]['sid'];
 	}
 
+	function submission_getLastAll() {
+		global $db;
+		$stmt = $db->prepare('SELECT sid FROM submission ORDER BY sid DESC');
+		$stmt->execute();
+		$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if (count($result)==0) return '-';
+		return $result[0]['sid'];
+	}
+
 	function submission_add($sid, $username, $code, $stamp, $language, $result) {
 		global $db;
 		$stmt = $db->prepare('INSERT INTO submission VALUES(:sid, :username, :code, :stamp, :language, :result)');

@@ -1,3 +1,4 @@
+var refresh_timeout;
 $(document).ready(function() {
 	$('.inlinesparkline').sparkline('html',{type: 'pie', barColor: 'green', sliceColors: ['#393','#933']});
 	$.getJSON('probstats.php', {"username" : $.query.get('username'), "code" : $.query.get('code')}, function(points) {
@@ -36,4 +37,19 @@ $(document).ready(function() {
 		     }]
 		  });
 	});
+	refresh_timeout = setInterval("refresh()", 60000);
+	refresh();
 });
+
+function refresh() {
+		$.get('refresh.php', function(data) {
+			var old = $('#refresh').html();		
+			if (old != '' && data != old) {
+				$('#refresh').html('Refresh').css('display: block');	
+				clearTimeout(refresh_timeout);
+				location.reload();
+			}
+			else
+				$('#refresh').html(data);		
+		});
+}

@@ -25,6 +25,9 @@
             <li><a href="problems.php">Problems</a></li>
             <li><a href="contests.php">Contests</a></li>
           </ul>
+		  <ul class="nav secondary-nav"">
+			<li><a href="." id="refresh"></a></li>
+		  </ul>
         </div>
       </div><!-- /topbar-inner -->
     </div><!-- /topbar -->
