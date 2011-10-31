@@ -3,7 +3,11 @@
 
 	$db = new PDO('sqlite:database/vscm.db');
 
-	$db->beginTransaction();
-	refresh_all();
-	$db->commit();
+	$lastrefresh = file_get_contents('last_refresh');
+    if ($lastrefresh == '' || $lastrefresh + 600 < time()) {
+		$db->beginTransaction();
+		refresh_all();
+		$db->commit();
+		file_put_contents('last_refresh', time());
+	}
 ?>

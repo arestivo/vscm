@@ -44,4 +44,28 @@
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	function user_getSolvedProblem($code) {
+		global $db;
+		$stmt = $db->prepare('SELECT DISTINCT user.* FROM user JOIN submission USING (username) WHERE code = :code AND result = \'AC\'');
+		$stmt->bindParam(':code', $code);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);			
+	}
+
+	function user_getFailedProblem($code) {
+		global $db;
+		$stmt = $db->prepare('SELECT DISTINCT user.* FROM user JOIN submission USING (username) WHERE code = :code AND username NOT IN (SELECT username FROM submission WHERE code = :code AND result = \'AC\')');
+		$stmt->bindParam(':code', $code);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);			
+	}
+
+	function user_getNotTriedProblem($code) {
+		global $db;
+		$stmt = $db->prepare('SELECT DISTINCT user.* FROM user WHERE username NOT IN (SELECT username FROM submission WHERE code = :code)');
+		$stmt->bindParam(':code', $code);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);			
+	}
+
 ?>

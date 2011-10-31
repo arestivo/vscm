@@ -8,15 +8,18 @@
 	$smarty = new Smarty;
 	$db = new PDO('sqlite:database/vscm.db');
         
-	$lastrefresh = file_get_contents('last_refresh');
-    if ($lastrefresh == '' || $lastrefresh + 600 < time()) {
-		$db->beginTransaction();
-		refresh_all();
-		$db->commit();
-		file_put_contents('last_refresh', time());
-	}
+	$solved = problem_numberUsersSolved();
+	$stats = problem_stats();
 
-	$problems = problem_stats();
+	foreach ($stats as $s) {
+		$problems[$s['code']]['code'] = $s['code'];
+		$problems[$s['code']]['accepted'] = $s['accepted'];
+		$problems[$s['code']]['failed'] = $s['failed'];
+		$problems[$s['code']]['solved'] = 0;
+	}
+	foreach ($solved as $s)
+		$problems[$s['code']]['solved'] = $s['solved'];
+
 	$smarty->assign('problems', $problems);
 	$smarty->display('problems.tpl');
 

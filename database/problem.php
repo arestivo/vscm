@@ -21,7 +21,9 @@
 
 	function problem_getSubmissionInContest($code, $username, $start, $stop) {
 		global $db;
-		$stmt = $db->prepare('SELECT * FROM submission WHERE code = :code AND username = :username AND stamp >= :start AND stamp <= :stop ORDER BY stamp ASC');
+		$stmt = $db->prepare('SELECT * FROM submission WHERE 
+			code = :code AND username = :username AND 
+			stamp >= :start AND stamp <= :stop ORDER BY stamp ASC');
 		$stmt->bindParam(':code', $code);
 		$stmt->bindParam(':username', $username);
 		$stmt->bindParam(':start', $start);
@@ -40,6 +42,14 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	function problem_numberUsersSolved() {
+		global $db;
+		$stmt = $db->prepare('SELECT code, COUNT(*) AS solved FROM (SELECT DISTINCT code, username, result 
+			FROM submission WHERE result = \'AC\') GROUP BY code');
+		$stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
 	function problem_userStats($username) {
 		global $db;
 		$stmt = $db->prepare('SELECT code,
@@ -51,15 +61,17 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
-	function problem_datestats($username) {
+	function problem_datestats($username, $code) {
 		global $db;
 		if ($username) $ufilter = ' WHERE username = :username '; else $ufilter = '';
+		if (!$username && $code != null) $ufilter = ' WHERE code = :code ';
 		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as d, 
 			COUNT(*) AS submited,
 			COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
 			COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed 
 			FROM submission ' . $ufilter . 'GROUP BY strftime(\'%Y-%m\', stamp, \'unixepoch\') ORDER BY d');
 		if ($username) $stmt->bindParam(':username', $username);
+		if (!$username && $code != null) $stmt->bindParam(':code', $code);
 		$stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$first = explode('-', $data[0]['d']);

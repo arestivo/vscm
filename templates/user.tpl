@@ -19,8 +19,9 @@
 <tr>
 {foreach from=$problems item=problem name=problems}
 <td class="{if $problem.accepted > 0}probok{else}probfail{/if}">
+	<span class="bignumber">{$problem.solved}</span>
 	<span class="inlinesparkline">{$problem.accepted},{$problem.failed}</span>
-	<a href="http://www.spoj.pl/problems/{$problem.code}/">{$problem.code}</a> 
+	<a href="problem.php?code={$problem.code}">{$problem.code}</a> 
 </td>
 {if $smarty.foreach.problems.index % 5 == 4}
 </tr>

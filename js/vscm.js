@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.inlinesparkline').sparkline('html',{type: 'pie', barColor: 'green', sliceColors: ['#393','#933']});
-	$.getJSON('probstats.php', {"username" : $.query.get('username')}, function(points) {
+	$.getJSON('probstats.php', {"username" : $.query.get('username'), "code" : $.query.get('code')}, function(points) {
 		new Highcharts.Chart({
 		     chart: {
 		        renderTo: 'problemchart',

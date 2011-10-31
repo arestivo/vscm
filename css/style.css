@@ -72,6 +72,13 @@
 	  	font-size: 85%;
   	  }
 
-	  .probok a{ color: #393}
-	  .probfail a{ color: #933}
+	  a.probok, .probok a{ color: #393}
+	  a.probfail, .probfail a{ color: #933}
+
+ 	  .bignumber{
+		font-style: helvetica;
+		font-size: 150%;
+		font-weight: bold;
+		line-height: 0;
+	  }
 
