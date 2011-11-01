@@ -87,3 +87,6 @@
 		display: none;
 	  }
 
+	  .arrow {
+	  	float: right;
+      }

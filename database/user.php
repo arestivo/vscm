@@ -1,11 +1,14 @@
 <?php
 	function user_getStats() {
 		global $db;
+		$week = strtotime('-1 week');
 		$stmt = $db->prepare(
 			'SELECT realname, username, 
 					COUNT(submission.sid) AS submissions,
+					COUNT(CASE WHEN stamp > '.$week.' THEN 1 ELSE NULL END) AS submissions_weekly,
 					COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed,
-					COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted
+					COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
+					COUNT(CASE WHEN stamp > '.$week.' AND result = \'AC\' THEN 1 ELSE NULL END) AS accepted_weekly
 			 FROM user LEFT JOIN 
 				  submission USING(username) 
 			 GROUP BY username');
@@ -15,11 +18,14 @@
 
 	function user_getUserStats($username) {
 		global $db;
+		$week = strtotime('-1 week');
 		$stmt = $db->prepare(
 			'SELECT realname, username, 
 					COUNT(submission.sid) AS submissions,
+					COUNT(CASE WHEN stamp > '.$week.' THEN 1 ELSE NULL END) AS submissions_weekly,
 					COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed,
-					COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted
+					COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
+					COUNT(CASE WHEN stamp > '.$week.' AND result = \'AC\' THEN 1 ELSE NULL END) AS accepted_weekly
 			 FROM user LEFT JOIN 
 				  submission USING(username) 
 			 WHERE username = :username
@@ -27,6 +33,29 @@
 		$stmt->bindParam(':username', $username);
 		$stmt->execute();
 		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	function user_getSolved() {
+		global $db;
+		$stmt = $db->prepare('SELECT username, COUNT(code) AS solved FROM user LEFT JOIN (
+			SELECT DISTINCT username, code
+				FROM user LEFT JOIN submission USING(username) 
+			 WHERE result = \'AC\') USING (username)
+			 GROUP BY username');
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	function user_getSolvedWeekly() {
+		global $db;
+		$week = strtotime('-1 week');
+		$stmt = $db->prepare('SELECT username, COUNT(code) AS solved_weekly FROM user LEFT JOIN (
+			SELECT username, code
+				FROM user LEFT JOIN submission USING(username) 
+			 WHERE result = \'AC\' GROUP BY username, code HAVING MAX (stamp) > '.$week.' ) USING (username)
+			 GROUP BY username');
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	function user_getAll() {

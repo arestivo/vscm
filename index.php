@@ -9,6 +9,11 @@
 	$db = new PDO('sqlite:database/vscm.db');
         
 	$stats = user_getStats();
-	$smarty->assign('stats', $stats);
+	$solved = user_getSolved();
+	$solved_weekly = user_getSolvedWeekly();
+	foreach ($stats as $s) $merged[$s['username']] = $s;
+	foreach ($solved as $s) $merged[$s['username']] = array_merge($merged[$s['username']], $s);
+	foreach ($solved_weekly as $s) $merged[$s['username']] = array_merge($merged[$s['username']], $s);
+	$smarty->assign('stats', $merged);
 	$smarty->display('index.tpl');
 ?>
