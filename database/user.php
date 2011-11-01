@@ -52,7 +52,7 @@
 		$stmt = $db->prepare('SELECT username, COUNT(code) AS solved_weekly FROM user LEFT JOIN (
 			SELECT username, code
 				FROM user LEFT JOIN submission USING(username) 
-			 WHERE result = \'AC\' GROUP BY username, code HAVING MAX (stamp) > '.$week.' ) USING (username)
+			 WHERE result = \'AC\' GROUP BY username, code HAVING MIN (stamp) > '.$week.' ) USING (username)
 			 GROUP BY username');
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
