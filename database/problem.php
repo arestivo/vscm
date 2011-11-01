@@ -65,7 +65,8 @@
 		global $db;
 		if ($username) $ufilter = ' WHERE username = :username '; else $ufilter = '';
 		if (!$username && $code != null) $ufilter = ' WHERE code = :code ';
-		$stmt = $db->prepare('select strftime(\'%Y-%m\', stamp, \'unixepoch\') as d, 
+
+		$stmt = $db->prepare('SELECT strftime(\'%Y-%m\', stamp, \'unixepoch\') AS d, 
 			COUNT(*) AS submited,
 			COUNT(CASE WHEN result = \'AC\' THEN 1 ELSE NULL END) AS accepted,
 			COUNT(CASE WHEN result <> \'AC\' THEN 1 ELSE NULL END) AS failed 
@@ -74,22 +75,39 @@
 		if (!$username && $code != null) $stmt->bindParam(':code', $code);
 		$stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 		$first = explode('-', $data[0]['d']);
 		foreach ($data as $d) $last = explode('-',$d['d']);
 		$year = (int)$first[0]; $month = (int)$first[1];
 		while ($year < $last[0] || $year == $last[0] && $month <= $last[1]) {
 			if ($month < 10) $month = '0' . $month;
-			$stats["$year-$month"] = array(0,0,0);
+			$stats["$year-$month"] = array(0,0,0,0);
 			$month++;
 			if ($month == 13) {$month = 1; $year++;}
 		}
-		foreach ($data as $d) $stats[$d['d']] = array((int)$d['submited'], (int)$d['accepted'], (int)$d['failed']);
+
+		if ($username) $ufilter = ' AND username = :username '; else $ufilter = '';
+		if (!$username && $code != null) $ufilter = ' AND code = :code ';
+		$stmt = $db->prepare('SELECT strftime(\'%Y-%m\', stamp, \'unixepoch\') AS d, 
+				COUNT(*) as solved FROM (SELECT code, MIN(stamp) AS stamp 
+				FROM submission WHERE result = \'AC\' '.$ufilter.' GROUP BY code) 
+				GROUP BY strftime(\'%Y-%m\', stamp, \'unixepoch\') ORDER BY d;');
+		if ($username) $stmt->bindParam(':username', $username);
+		if (!$username && $code != null) $stmt->bindParam(':code', $code);
+		$stmt->execute();
+		$solved = $stmt->fetchAll();
+
+		foreach ($data as $d) $stats[$d['d']] = array((int)$d['submited'], (int)$d['accepted'], (int)$d['failed'], 0);		
+		foreach ($solved as $s) $stats[$s['d']][3] = (int)$s['solved'];
+
 		foreach ($stats as $y => $s) {
 			$return[0][] = $y;
 			$return[1][] = $s[0];
 			$return[2][] = $s[1];
 			$return[3][] = $s[2];
+			$return[4][] = $s[3];
 		}
+
 		return $return;
 	}
 

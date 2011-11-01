@@ -34,6 +34,10 @@ $(document).ready(function() {
 		        name: 'Failed',
 		        data: points[3],
 				color: '#933'
+		     },{
+		        name: 'Solved',
+		        data: points[4],
+				color: '#963'
 		     }]
 		  });
 	});
