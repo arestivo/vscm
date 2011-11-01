@@ -32,7 +32,7 @@
 			$fields = explode('|', $row);
 
 			if ($lastid != null && (int)$fields[1] <= (int)$lastid) break;
-			if ($fields[4] == '??') break;
+			if (trim($fields[4]) == '??') break;
 			if (is_numeric(trim($fields[4]))) $fields[4] = 'AC';
 			$prows[] = array(
 				'sid' => trim($fields[1]),
