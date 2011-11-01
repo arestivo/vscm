@@ -16,6 +16,4 @@
 	foreach ($solved_weekly as $s) $merged[$s['username']] = array_merge($merged[$s['username']], $s);
 	$smarty->assign('stats', $merged);
 	$smarty->display('index.tpl');
-
-	echo strtotime('next monday');
 ?>
