@@ -56,14 +56,15 @@
 				}
 				$fails++; 
 			}
-			$users[$uid]['problems'][] = array('code' => $problem['code'], 'state' => $state, 'fails' => $fails, 'time' => $dtime, 'utime' => $time);
+			$users[$uid]['problems'][] = array('code' => $problem['code'], 'state' => $state, 'fails' => $fails, 'time' => $dtime);
 		}
 		$users[$uid]['solved'] = $solved;
 		$users[$uid]['total'] = getTime($total);
+		$users[$uid]['utotal'] = $total;
 	}
 
 	function cmp($a, $b) {
-		if ($a['solved'] == $b['solved']) return $a['utime'] < $b['utime'];
+		if ($a['solved'] == $b['solved']) return $a['utotal'] > $b['utotal'];
 		return ($a['solved'] < $b['solved']);
 	}
 	
