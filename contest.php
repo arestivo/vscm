@@ -63,7 +63,7 @@
 	}
 
 	function cmp($a, $b) {
-		if ($a['solved'] == $b['solved']) return $a['utime'] > $b['utime'];
+		if ($a['solved'] == $b['solved']) return $a['utime'] < $b['utime'];
 		return ($a['solved'] < $b['solved']);
 	}
 	
