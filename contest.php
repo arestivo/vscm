@@ -10,15 +10,6 @@
 	$db = new PDO('sqlite:database/vscm.db');
 
 	$contest = contest_get($_GET['cid']);
-	if ((int)$contest['start'] < time() && (int)$contest['stop'] > time()) {
-		$lastrefresh = file_get_contents('last_refresh');
-		if ($lastrefresh == '' || $lastrefresh + 180 < time()) {
-			$db->beginTransaction();
-			refresh_all();
-			$db->commit();
-			file_put_contents('last_refresh', time());
-		}	
-	}
 
 	function getTime($interval) {
 		$minutes = (int)($interval / 60);
